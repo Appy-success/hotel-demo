@@ -3,9 +3,9 @@
   "@odata.etag": "\"0x8DDBD080B342147\"",
   "name": "hotels-indexer",
   "description": "",
-  "dataSourceName": "hotels-sample",
-  "skillsetName": "hotels-skillset",
-  "targetIndexName": "hotels-index",
+  "dataSourceName": "update wih dataSourceName",
+  "skillsetName": "update wih skillsetName",
+  "targetIndexName": "update wih targetIndexName",
   "disabled": null,
   "schedule": null,
   "parameters": {

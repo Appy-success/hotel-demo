@@ -353,3 +353,47 @@ pip freeze > requirements.txt
 - Filter by star ratings (3+, 4+, 5 stars)
 - Sort by highest rated first
 - Find recently renovated properties
+
+## 🔒 Security & Configuration
+
+### Sensitive Information Removed
+This repository has been sanitized to remove all sensitive information including:
+- **Azure Search Service URLs** - Replaced with placeholder `YOUR_SEARCH_SERVICE_NAME`
+- **API Keys** - Replaced with placeholder `YOUR_SEARCH_SERVICE_QUERY_KEY_HERE`
+- **Connection Strings** - Removed and replaced with template values
+- **Subscription IDs** - Removed from configuration files
+
+### Required Configuration Updates
+
+**Before deploying, you must update these files:**
+
+1. **`.env` file** - Configure your Azure Search credentials:
+   ```bash
+   SEARCH_SERVICE_ENDPOINT=https://your-search-service.search.windows.net
+   SEARCH_SERVICE_QUERY_KEY=your-actual-query-key
+   SEARCH_INDEX_NAME=hotels-index
+   ```
+
+2. **`modify-search/indexer.json`** - Update these fields:
+   ```json
+   {
+     "@odata.context": "https://YOUR_SEARCH_SERVICE.search.windows.net/...",
+     "dataSourceName": "YOUR_DATA_SOURCE_NAME"
+   }
+   ```
+
+3. **Azure Cognitive Services** - Add your Cognitive Services configuration to skillset if needed
+
+### Environment Template
+Use `.env.template` as a reference for required environment variables:
+```bash
+cp .env.template .env
+# Then edit .env with your actual values
+```
+
+### Security Best Practices
+- **Never commit credentials** to version control
+- **Use Azure Key Vault** for production environments
+- **Rotate keys regularly** through Azure Portal
+- **Use managed identities** when possible
+- **Restrict access** with appropriate RBAC roles
