@@ -1,0 +1,52 @@
+{
+  "@odata.context": "https://apsearcheastus01.search.windows.net/$metadata#indexers/$entity",
+  "@odata.etag": "\"0x8DDBD080B342147\"",
+  "name": "hotels-indexer",
+  "description": "",
+  "dataSourceName": "hotels-sample",
+  "skillsetName": "hotels-skillset",
+  "targetIndexName": "hotels-index",
+  "disabled": null,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": 0,
+    "maxFailedItemsPerBatch": 0,
+    "configuration": {}
+  },
+  "fieldMappings": [],
+  "outputFieldMappings": [
+    {
+      "sourceFieldName": "/document/HotelId/people",
+      "targetFieldName": "people",
+      "mappingFunction": null
+    },
+    {
+      "sourceFieldName": "/document/HotelId/organizations",
+      "targetFieldName": "organizations",
+      "mappingFunction": null
+    },
+    {
+      "sourceFieldName": "/document/HotelId/locations",
+      "targetFieldName": "locations",
+      "mappingFunction": null
+    },
+    {
+      "sourceFieldName": "/document/HotelId/keyphrases",
+      "targetFieldName": "keyphrases",
+      "mappingFunction": null
+    },
+    {
+      "sourceFieldName": "/document/HotelId/pii_entities",
+      "targetFieldName": "pii_entities",
+      "mappingFunction": null
+    },
+    {
+      "sourceFieldName": "/document/HotelId/masked_text",
+      "targetFieldName": "masked_text",
+      "mappingFunction": null
+    }
+  ],
+  "cache": null,
+  "encryptionKey": null
+}

@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="searchBoxForm">
+    <h3 style="color: #764ba2; margin-top: 0;">Search Results</h3>
+    <form name="refine_form" action="/search" method="GET">
+        <p><strong>Search:</strong> {{ search_terms }}</p>
+        <p><strong>Results:</strong> {{ search_results.get_count() }} hotels found</p>
+        
+        <!-- Hotel Category Filter -->
+        <div class="filter-section">
+            <p class="filterTitle">📂 Filter by Category:</p>
+            <input name="search" type="hidden" value="{{ search_terms }}"/>
+            <input name="facet_type" type="hidden" value="Category"/>
+            {% if search_results.get_facets() and search_results.get_facets()['Category'] %}
+                {% for facet in search_results.get_facets()['Category']: %}
+                    <div><input name="facet" value="{{ facet['value'] }}" type="radio" id="cat_{{ loop.index }}">
+                    <label for="cat_{{ loop.index }}">{{ facet['value'] }} ({{ facet['count'] }})</label></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <!-- Hotel Tags Filter -->
+        <div class="filter-section">
+            <p class="filterTitle">🏷️ Filter by Amenities:</p>
+            {% if search_results.get_facets() and search_results.get_facets()['Tags'] %}
+                {% for facet in search_results.get_facets()['Tags'][:5]: %}
+                    <div><input name="facet" value="{{ facet['value'] }}" type="radio" id="tag_{{ loop.index }}">
+                    <label for="tag_{{ loop.index }}">{{ facet['value'] }} ({{ facet['count'] }})</label></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <!-- Hotel Rating Filter -->
+        <div class="filter-section">
+            <p class="filterTitle">⭐ Filter by Rating:</p>
+            {% if search_results.get_facets() and search_results.get_facets()['Rating'] %}
+                {% for facet in search_results.get_facets()['Rating']: %}
+                    <div><input name="facet" value="{{ facet['value'] }}" type="radio" id="rating_{{ loop.index }}">
+                    <label for="rating_{{ loop.index }}">{{ facet['value'] }}+ stars ({{ facet['count'] }})</label></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <p class="sortList">🔄 Sort by: 
+            <select id="sort" name="sort">
+                <option value="relevance">Relevance</option>
+                <option value="name" {% if sort_field == 'name' %}selected {% endif %}>Hotel Name</option>
+                <option value="rating" {% if sort_field == 'rating' %}selected {% endif %}>Highest Rating</option>
+                <option value="date" {% if sort_field == 'date' %}selected {% endif %}>Most Recently Renovated</option>
+            </select>
+        </p>
+        <input name="refine" type="submit" value="🔍 Refine Results" class="refineButton"></input>
+    </form>
+</div>
+{% if search_results.get_count() == 0 %}
+<div class="no-results">
+    <h3>🔍 No hotels found for "{{ search_terms }}"</h3>
+    <p>Try these search suggestions:</p>
+    <div class="example-tags">
+        <button type="button" class="example-tag" onclick="searchExample('gaming resort')">🎮 Gaming Resort</button>
+        <button type="button" class="example-tag" onclick="searchExample('pool spa')">🏊 Pool & Spa</button>
+        <button type="button" class="example-tag" onclick="searchExample('luxury hotel')">✨ Luxury Hotel</button>
+        <button type="button" class="example-tag" onclick="searchExample('breakfast included')">🍳 Breakfast Included</button>
+        <button type="button" class="example-tag" onclick="searchExample('business hotel')">💼 Business Hotel</button>
+        <button type="button" class="example-tag" onclick="searchExample('family friendly')">👨‍👩‍👧‍👦 Family Friendly</button>
+    </div>
+    <p class="search-tips">
+        <strong>💡 Search Tips:</strong><br>
+        • Try broader terms like "resort" or "hotel"<br>
+        • Search for amenities: "pool", "spa", "gym", "restaurant"<br>
+        • Look for experiences: "luxury", "family", "business"<br>
+        • Use location terms: "downtown", "airport", "beach"
+    </p>
+</div>
+
+<script>
+function searchExample(term) {
+    document.querySelector('input[name="search"]').value = term;
+    document.querySelector('form[name="search_form"]').submit();
+}
+</script>
+{% endif %}
+{% for search_result in search_results: %}
+<div class="result">
+    <h3 class="resultLink">{{ search_result['HotelName'] }}</h3>
+    <p class="hotelId">Hotel ID: {{ search_result['HotelId'] }}</p>
+    
+    <!-- Hotel Description with Highlighting -->
+    {% if search_result['@search.highlights'] is defined %}
+        {% if search_result['@search.highlights']['HotelName']|length > 0 %}
+            <div><strong>Hotel Name:</strong> {% for highlight in search_result['@search.highlights']['HotelName']: %} <span class='resultExtract'>{{ highlight|safe }}</span> {% endfor %}</div>
+        {% endif %}
+        {% if search_result['@search.highlights']['Description']|length > 0 %}
+            <div><strong>Description:</strong> {% for highlight in search_result['@search.highlights']['Description']: %} <p class='resultExtract'>{{ highlight|safe }}</p> {% endfor %}</div>
+        {% endif %}
+    {% else %}
+        <p class="description">{{ search_result['Description'] }}</p>
+    {% endif %}
+    
+    <ul class="resultAttributes">
+        <li><strong>Category:</strong> {{ search_result['Category'] }}</li>
+        <li><strong>Rating:</strong> {{ search_result['Rating'] }}/5 stars</li>
+        <li><strong>Parking Included:</strong> {{ 'Yes' if search_result['ParkingIncluded'] else 'No' }}</li>
+        {% if search_result['LastRenovationDate'] %}
+            <li><strong>Last Renovated:</strong> {{ search_result['LastRenovationDate'][:10] }}</li>
+        {% endif %}
+        
+        <!-- Hotel Tags -->
+        {% if search_result['Tags'] and search_result['Tags']|length > 0 %}
+            <li><strong>Amenities:</strong>
+                <ul class="resultAttributes">
+                    {% for tag in search_result['Tags'] %}
+                        <li>{{ tag }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        
+        <!-- Hotel Address -->
+        {% if search_result['Address'] %}
+            <li><strong>Address:</strong> {{ search_result['Address']['StreetAddress'] }}, {{ search_result['Address']['City'] }}, {{ search_result['Address']['StateProvince'] }} {{ search_result['Address']['PostalCode'] }}</li>
+        {% endif %}
+        
+        <!-- AI-Enriched Content from Skillset -->
+        {% if search_result['keyphrases'] and search_result['keyphrases']|length > 0 %}
+            <li><strong>Key Phrases:</strong>
+                <ul class="resultAttributes">
+                    {% for key_phrase in search_result['keyphrases'][:5] %}
+                        <li>{{ key_phrase }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        
+        {% if search_result['locations'] and search_result['locations']|length > 0 %}
+            <li><strong>Detected Locations:</strong>
+                <ul class="resultAttributes">
+                    {% for location in search_result['locations'][:5] %}
+                        <li>{{ location }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        
+        {% if search_result['people'] and search_result['people']|length > 0 %}
+            <li><strong>People Mentioned:</strong>
+                <ul class="resultAttributes">
+                    {% for person in search_result['people'][:3] %}
+                        <li>{{ person }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+        
+        {% if search_result['organizations'] and search_result['organizations']|length > 0 %}
+            <li><strong>Organizations Mentioned:</strong>
+                <ul class="resultAttributes">
+                    {% for org in search_result['organizations'][:3] %}
+                        <li>{{ org }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}

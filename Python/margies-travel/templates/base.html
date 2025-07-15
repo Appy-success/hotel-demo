@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Azure Hotel Search</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    </head>
+    <body>
+        <header class="main-header">
+            <div class="header-content">
+                <h1>🏨 Azure Hotel Search</h1>
+                <p class="tagline">Find your perfect stay with AI-powered search</p>
+            </div>
+        </header>
+        <div class="search-container">
+            <div class="search-box">
+                <p>Search hotels by name, location, or amenities</p>
+                <form name="search_form" action="/search" method="GET">
+                    <input name="search" type="text" value="{{ search_terms }}" placeholder="Try: gaming, pool, spa, luxury..."></input>
+                    <input name="submit" type="submit" value="Search Hotels"></input>
+                </form>
+                <div class="search-examples">
+                    <p><strong>💡 Try these searches:</strong></p>
+                    <div class="example-tags">
+                        <button type="button" class="example-tag" onclick="searchExample('gaming')">🎮 Gaming</button>
+                        <button type="button" class="example-tag" onclick="searchExample('pool')">🏊 Pool</button>
+                        <button type="button" class="example-tag" onclick="searchExample('spa')">🧖 Spa</button>
+                        <button type="button" class="example-tag" onclick="searchExample('luxury')">✨ Luxury</button>
+                        <button type="button" class="example-tag" onclick="searchExample('resort')">🏝️ Resort</button>
+                        <button type="button" class="example-tag" onclick="searchExample('breakfast')">🍳 Breakfast</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+        function searchExample(term) {
+            document.querySelector('input[name="search"]').value = term;
+            document.querySelector('form[name="search_form"]').submit();
+        }
+        </script>
+        {% block content %}{% endblock %}
+    </body>
+</html>

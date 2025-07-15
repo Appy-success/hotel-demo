@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="welcome-section">
+    <div class="welcome-content">
+        <h2>Welcome to Azure Hotel Search</h2>
+        <p>Discover amazing hotels with our AI-powered search engine. Find accommodations by location, amenities, or ratings.</p>
+        
+        <div class="search-suggestions">
+            <h3>🔍 What can you search for?</h3>
+            <div class="suggestion-grid">
+                <div class="suggestion-item">
+                    <strong>By Amenities:</strong>
+                    <ul>
+                        <li>pool, spa, gym, breakfast</li>
+                        <li>wifi, parking, restaurant</li>
+                        <li>gaming, casino, bar</li>
+                    </ul>
+                </div>
+                <div class="suggestion-item">
+                    <strong>By Experience:</strong>
+                    <ul>
+                        <li>luxury, resort, boutique</li>
+                        <li>family-friendly, romantic</li>
+                        <li>business, conference</li>
+                    </ul>
+                </div>
+                <div class="suggestion-item">
+                    <strong>By Location:</strong>
+                    <ul>
+                        <li>city center, downtown</li>
+                        <li>beach, mountain, airport</li>
+                        <li>specific city names</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="icon">🔍</span>
+                <h3>Smart Search</h3>
+                <p>AI-powered search with entity recognition and key phrase extraction</p>
+            </div>
+            <div class="feature">
+                <span class="icon">⭐</span>
+                <h3>Quality Ratings</h3>
+                <p>Filter by ratings and reviews to find the perfect match</p>
+            </div>
+            <div class="feature">
+                <span class="icon">📍</span>
+                <h3>Location Based</h3>
+                <p>Find hotels by location, nearby attractions, and amenities</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
