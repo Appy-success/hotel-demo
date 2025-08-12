@@ -19,12 +19,15 @@
   pip install -r requirements.txt
   ```
 6. **Configure environment variables**:
-  - Create a `.env` file in the project root with your Azure Search credentials:
+  - Create a `.env` file in the project root and fill in your Azure Search credentials:
     ```env
     SEARCH_SERVICE_ENDPOINT=your_search_endpoint
-    SEARCH_SERVICE_QUERY_KEY=your_query_key
-    SEARCH_INDEX_NAME=hotels-index
+    SEARCH_SERVICE_QUERY_KEY=your_search_query_key
+    SEARCH_INDEX_NAME=your_index_name
+    SEARCH_INDEXER_NAME=your_indexer_name
+    SEARCH_SKILLSET_NAME=your_skillset_name
     ```
+  - **Important:** Do NOT commit your actual credentials to GitHub. Use placeholder values in `.env` and keep your real credentials private.
 7. **Run the application**:
   ```powershell
   python Python/hotel-travel/app.py
