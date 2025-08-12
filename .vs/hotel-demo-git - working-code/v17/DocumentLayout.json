@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\Python\\hotel-travel\\.env.template||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Python\\hotel-travel\\.env.template||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\index.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:modify-search\\index.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:README.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\indexer.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:modify-search\\indexer.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\skillset.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:modify-search\\skillset.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\Python\\hotel-travel\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Python\\hotel-travel\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".env.template",
+              "DocumentMoniker": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\Python\\hotel-travel\\.env.template",
+              "RelativeDocumentMoniker": "Python\\hotel-travel\\.env.template",
+              "ToolTip": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\Python\\hotel-travel\\.env.template",
+              "RelativeToolTip": "Python\\hotel-travel\\.env.template",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-12T11:02:21.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "app.py",
+              "DocumentMoniker": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\Python\\hotel-travel\\app.py",
+              "RelativeDocumentMoniker": "Python\\hotel-travel\\app.py",
+              "ToolTip": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\Python\\hotel-travel\\app.py",
+              "RelativeToolTip": "Python\\hotel-travel\\app.py",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
+              "WhenOpened": "2025-08-12T11:01:58.07Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAIgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-08-12T10:46:05.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "skillset.json",
+              "DocumentMoniker": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\skillset.json",
+              "RelativeDocumentMoniker": "modify-search\\skillset.json",
+              "ToolTip": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\skillset.json",
+              "RelativeToolTip": "modify-search\\skillset.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-12T10:45:40.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "indexer.json",
+              "DocumentMoniker": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\indexer.json",
+              "RelativeDocumentMoniker": "modify-search\\indexer.json",
+              "ToolTip": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\indexer.json",
+              "RelativeToolTip": "modify-search\\indexer.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-12T10:41:30.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.json",
+              "DocumentMoniker": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\index.json",
+              "RelativeDocumentMoniker": "modify-search\\index.json",
+              "ToolTip": "C:\\Azure-Deleveries\\AI-3022-ENU-Powerpoint\\hotel-demo-git - working-code\\modify-search\\index.json",
+              "RelativeToolTip": "modify-search\\index.json",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABwAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-08-12T10:38:05.489Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

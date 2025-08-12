@@ -1,6 +1,6 @@
 {
   "@odata.etag": "\"0x8DDBD0801EEABC4\"",
-  "name": "hotels-skillset",
+  "name": "hotels-sample-skillset",
   "description": "Skillset created from the portal. skillsetName: hotels-skillset; contentField: HotelId; enrichmentGranularity: document; knowledgeStoreStorageAccount: ;",
   "skills": [
     {

@@ -1,86 +1,68 @@
+<!-- Try These Searches Category Section -->
+<div class="search-examples">
+    <h3>🏷️ Try These Searches by Category</h3>
+    <div class="example-tags">
+        <button type="button" class="example-tag" onclick="searchExample('Hotels in New York with free Wi-Fi')">🗽 NY Hotels with Free Wi-Fi</button>
+        <button type="button" class="example-tag" onclick="searchExample('4-star hotels near the airport')">✈️ 4-Star Near Airport</button>
+        <button type="button" class="example-tag" onclick="searchExample('Pet-friendly hotels in San Francisco')">🐶 SF Pet-Friendly</button>
+        <button type="button" class="example-tag" onclick="searchExample('Budget hotels under $100 per night')">💸 Budget Hotels < $100</button>
+        <button type="button" class="example-tag" onclick="searchExample('Luxury hotels with spa services')">✨ Luxury Spa Hotels</button>
+        <button type="button" class="example-tag" onclick="searchExample('Hotels with family rooms and breakfast included')">👨‍👩‍👧‍👦 Family + Breakfast</button>
+        <button type="button" class="example-tag" onclick="searchExample('Accessible hotels in downtown Chicago')">♿ Chicago Accessible</button>
+        <button type="button" class="example-tag" onclick="searchExample('Hotels with ocean view in Miami')">🌊 Miami Ocean View</button>
+        <button type="button" class="example-tag" onclick="searchExample('Business hotels with conference facilities')">� Business + Conference</button>
+        <button type="button" class="example-tag" onclick="searchExample('Recently renovated hotels in London')">� London Renovated</button>
+        <button type="button" class="example-tag" onclick="searchExample('Hotels with pool, gym, and spa under $150')">🏊💆🏋️ Pool, Gym, Spa < $150</button>
+        <button type="button" class="example-tag" onclick="searchExample('Hotels renovated after 2022 with ocean view')">🔨� Renovated After 2022 + Ocean View</button>
+        <button type="button" class="example-tag" onclick="searchExample('Family hotels with free parking and breakfast')">👨‍👩‍👧‍👦🅿️🍳 Family + Parking + Breakfast</button>
+        <button type="button" class="example-tag" onclick="searchExample('Business hotels with conference room and Wi-Fi')">�📶 Business + Conference + Wi-Fi</button>
+        <button type="button" class="example-tag" onclick="searchExample('Pet-friendly hotels with garden and 5-star rating')">🐶�⭐ Pet-Friendly + Garden + 5-Star</button>
+    </div>
+</div>
 {% extends "base.html" %}
 {% block content %}
-<div class="searchBoxForm">
-    <h3 style="color: #764ba2; margin-top: 0;">Search Results</h3>
-    <form name="refine_form" action="/search" method="GET">
-        <p><strong>Search:</strong> {{ search_terms }}</p>
-        <p><strong>Results:</strong> {{ search_results.get_count() }} hotels found</p>
-        
-        <!-- Hotel Category Filter -->
-        <div class="filter-section">
-            <p class="filterTitle">📂 Filter by Category:</p>
-            <input name="search" type="hidden" value="{{ search_terms }}"/>
-            <input name="facet_type" type="hidden" value="Category"/>
-            {% if search_results.get_facets() and search_results.get_facets()['Category'] %}
-                {% for facet in search_results.get_facets()['Category']: %}
-                    <div><input name="facet" value="{{ facet['value'] }}" type="radio" id="cat_{{ loop.index }}">
-                    <label for="cat_{{ loop.index }}">{{ facet['value'] }} ({{ facet['count'] }})</label></div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        
-        <!-- Hotel Tags Filter -->
-        <div class="filter-section">
-            <p class="filterTitle">🏷️ Filter by Amenities:</p>
-            {% if search_results.get_facets() and search_results.get_facets()['Tags'] %}
-                {% for facet in search_results.get_facets()['Tags'][:5]: %}
-                    <div><input name="facet" value="{{ facet['value'] }}" type="radio" id="tag_{{ loop.index }}">
-                    <label for="tag_{{ loop.index }}">{{ facet['value'] }} ({{ facet['count'] }})</label></div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        
-        <!-- Hotel Rating Filter -->
-        <div class="filter-section">
-            <p class="filterTitle">⭐ Filter by Rating:</p>
-            {% if search_results.get_facets() and search_results.get_facets()['Rating'] %}
-                {% for facet in search_results.get_facets()['Rating']: %}
-                    <div><input name="facet" value="{{ facet['value'] }}" type="radio" id="rating_{{ loop.index }}">
-                    <label for="rating_{{ loop.index }}">{{ facet['value'] }}+ stars ({{ facet['count'] }})</label></div>
-                {% endfor %}
-            {% endif %}
-        </div>
-        
-        <p class="sortList">🔄 Sort by: 
-            <select id="sort" name="sort">
-                <option value="relevance">Relevance</option>
-                <option value="name" {% if sort_field == 'name' %}selected {% endif %}>Hotel Name</option>
-                <option value="rating" {% if sort_field == 'rating' %}selected {% endif %}>Highest Rating</option>
-                <option value="date" {% if sort_field == 'date' %}selected {% endif %}>Most Recently Renovated</option>
-            </select>
-        </p>
-        <input name="refine" type="submit" value="🔍 Refine Results" class="refineButton"></input>
-    </form>
-</div>
-{% if search_results.get_count() == 0 %}
-<div class="no-results">
-    <h3>🔍 No hotels found for "{{ search_terms }}"</h3>
-    <p>Try these search suggestions:</p>
-    <div class="example-tags">
-        <button type="button" class="example-tag" onclick="searchExample('gaming resort')">🎮 Gaming Resort</button>
-        <button type="button" class="example-tag" onclick="searchExample('pool spa')">🏊 Pool & Spa</button>
-        <button type="button" class="example-tag" onclick="searchExample('luxury hotel')">✨ Luxury Hotel</button>
-        <button type="button" class="example-tag" onclick="searchExample('breakfast included')">🍳 Breakfast Included</button>
-        <button type="button" class="example-tag" onclick="searchExample('business hotel')">💼 Business Hotel</button>
-        <button type="button" class="example-tag" onclick="searchExample('family friendly')">👨‍👩‍👧‍👦 Family Friendly</button>
-    </div>
-    <p class="search-tips">
-        <strong>💡 Search Tips:</strong><br>
-        • Try broader terms like "resort" or "hotel"<br>
-        • Search for amenities: "pool", "spa", "gym", "restaurant"<br>
-        • Look for experiences: "luxury", "family", "business"<br>
-        • Use location terms: "downtown", "airport", "beach"
-    </p>
-</div>
 
 <script>
 function searchExample(term) {
     document.querySelector('input[name="search"]').value = term;
-    document.querySelector('form[name="search_form"]').submit();
+    document.forms[0].submit();
 }
 </script>
+
+
+{% if search_results.get_count() == 0 %}
+    <!-- Only show search examples if no results -->
+    <div class="search-examples">
+        <h3>🔎 Try These Real-World & Advanced Search Scenarios</h3>
+        <div class="example-tags">
+            <button type="button" class="example-tag" onclick="searchExample('Hotels in New York with free Wi-Fi')">🗽 NY Hotels with Free Wi-Fi</button>
+            <button type="button" class="example-tag" onclick="searchExample('4-star hotels near the airport')">✈️ 4-Star Near Airport</button>
+            <button type="button" class="example-tag" onclick="searchExample('Pet-friendly hotels in San Francisco')">🐶 SF Pet-Friendly</button>
+            <button type="button" class="example-tag" onclick="searchExample('Budget hotels under $100 per night')">💸 Budget Hotels</button>
+            <button type="button" class="example-tag" onclick="searchExample('Luxury hotels with spa services')">✨ Luxury Spa Hotels</button>
+            <button type="button" class="example-tag" onclick="searchExample('Hotels with family rooms and breakfast included')">👨‍👩‍👧‍👦 Family + Breakfast</button>
+            <button type="button" class="example-tag" onclick="searchExample('Accessible hotels in downtown Chicago')">♿ Chicago Accessible</button>
+            <button type="button" class="example-tag" onclick="searchExample('Hotels with ocean view in Miami')">🌊 Miami Ocean View</button>
+            <button type="button" class="example-tag" onclick="searchExample('Business hotels with conference facilities')">🏢 Business + Conference</button>
+            <button type="button" class="example-tag" onclick="searchExample('Recently renovated hotels in London')">🔨 London Renovated</button>
+            <!-- Advanced search examples -->
+            <button type="button" class="example-tag" onclick="searchExample('Hotels with pool, gym, and spa under $150')">🏊💆🏋️ Pool, Gym, Spa < $150</button>
+            <button type="button" class="example-tag" onclick="searchExample('Hotels renovated after 2022 with ocean view')">🔨🌊 Renovated After 2022 + Ocean View</button>
+            <button type="button" class="example-tag" onclick="searchExample('Family hotels with free parking and breakfast')">👨‍👩‍👧‍👦🅿️🍳 Family + Parking + Breakfast</button>
+            <button type="button" class="example-tag" onclick="searchExample('Business hotels with conference room and Wi-Fi')">🏢📶 Business + Conference + Wi-Fi</button>
+            <button type="button" class="example-tag" onclick="searchExample('Pet-friendly hotels with garden and 5-star rating')">🐶🌳⭐ Pet-Friendly + Garden + 5-Star</button>
+        </div>
+        <p class="search-tips">
+            <strong>💡 Search Tips:</strong><br>
+            • Combine amenities, location, rating, price, and experience keywords<br>
+            • Filter by renovation date, price, or multiple amenities<br>
+            • Use location terms: "downtown", "airport", "beach"<br>
+            • Look for experiences: "luxury", "family", "business"<br>
+        </p>
+    </div>
 {% endif %}
-{% for search_result in search_results: %}
+
+{% for search_result in search_results %}
 <div class="result">
     <h3 class="resultLink">{{ search_result['HotelName'] }}</h3>
     <p class="hotelId">Hotel ID: {{ search_result['HotelId'] }}</p>

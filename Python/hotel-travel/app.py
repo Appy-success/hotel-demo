@@ -1,3 +1,18 @@
+EXAMPLE_SEARCHES = [
+    "pool",  # Find hotels with swimming pools
+    "spa",  # Discover hotels with spa facilities
+    "gym",  # Hotels with fitness centers
+    "breakfast",  # Hotels offering breakfast
+    "gaming",  # Hotels with casino or gaming facilities
+    "restaurant",  # Hotels with dining options
+    "luxury spa resort",  # High-end spa resorts
+    "family pool hotel",  # Family hotels with pools
+    "business downtown",  # Business hotels in city center
+    "airport",  # Hotels near the airport
+    "beach",  # Beachfront properties
+    "4 star",  # Hotels with 4-star rating
+    "renovated"  # Find recently renovated hotels
+]
 import os
 import logging
 from flask import Flask, request, render_template, redirect, url_for
@@ -15,11 +30,24 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Azure Search constants
+
+# Load environment variables for Azure Search config only
 load_dotenv()
 search_endpoint = os.getenv('SEARCH_SERVICE_ENDPOINT')
 search_key = os.getenv('SEARCH_SERVICE_QUERY_KEY')
-search_index = os.getenv('SEARCH_INDEX_NAME', 'hotels-index')  # Default to hotels-index
+search_index = os.getenv('SEARCH_INDEX_NAME')
+search_indexer = os.getenv('SEARCH_INDEXER_NAME')
+search_skillset = os.getenv('SEARCH_SKILLSET_NAME')
+
+# Fail fast if any required config is missing
+required_vars = [
+    ("SEARCH_SERVICE_ENDPOINT", search_endpoint),
+    ("SEARCH_SERVICE_QUERY_KEY", search_key),
+    ("SEARCH_INDEX_NAME", search_index)
+]
+missing_vars = [var for var, val in required_vars if not val]
+if missing_vars:
+    raise RuntimeError(f"Missing required environment variables: {', '.join(missing_vars)}. Please set them in your .env file.")
 
 # Wrapper function for request to search index with optimized hotel search
 def search_query(search_text, filter_by=None, sort_order=None):
@@ -27,26 +55,26 @@ def search_query(search_text, filter_by=None, sort_order=None):
         # Create a search client with connection pooling
         azure_credential = AzureKeyCredential(search_key)
         search_client = SearchClient(search_endpoint, search_index, azure_credential)
-        
+
         # Log the search request
         logger.info(f"Searching for: {search_text}")
-        
+
         # Submit search query optimized for hotel data
         results = search_client.search(
             search_text,
-            search_mode="any",  # Changed from "all" to "any" for better hotel search results
+            search_mode="any",
             include_total_count=True,
             filter=filter_by,
             order_by=sort_order,
-            facets=['Category', 'Tags', 'Rating'],  # Hotel-specific facets
-            highlight_fields='HotelName,Description',  # Hotel-specific highlight fields
+            facets=['Category', 'Tags', 'Rating'],
+            highlight_fields='HotelName,Description',
             select="HotelId,HotelName,Description,Category,Tags,ParkingIncluded,LastRenovationDate,Rating,Address,people,organizations,locations,keyphrases,masked_text",
-            top=20  # Limit results for better performance
+            top=20
         )
-        
+
         logger.info(f"Search returned {results.get_count()} results")
         return results
-        
+
     except AzureError as azure_ex:
         logger.error(f"Azure Search error: {azure_ex}")
         raise azure_ex
@@ -67,7 +95,7 @@ def search():
         search_text = request.args.get("search", "")
         
         if not search_text:
-            return render_template("search.html", search_results=[], search_terms="", error="Please enter a search term")
+            return render_template("search.html", search_results=[], search_terms="", error="Please enter a search term", example_searches=EXAMPLE_SEARCHES)
 
         # If a facet is selected, use it in a filter
         filter_expression = None
@@ -103,9 +131,10 @@ def search():
 
         # render the results
         return render_template("search.html", 
-                             search_results=results, 
-                             search_terms=search_text,
-                             sort_field=sort_field)
+                 search_results=results, 
+                 search_terms=search_text,
+                 sort_field=sort_field,
+                 example_searches=EXAMPLE_SEARCHES)
 
     except Exception as error:
         logger.error(f"Search route error: {error}")
@@ -118,7 +147,7 @@ def health_check():
         # Test search service connection
         azure_credential = AzureKeyCredential(search_key)
         search_client = SearchClient(search_endpoint, search_index, azure_credential)
-        
+
         # Simple search to test connectivity
         search_client.search("*", top=1)
         return {"status": "healthy", "search_service": "connected"}, 200

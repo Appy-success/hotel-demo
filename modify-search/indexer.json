@@ -1,11 +1,11 @@
 {
-  "@odata.context": "https://apsearcheastus01.search.windows.net/$metadata#indexers/$entity",
+  "@odata.context": "${SEARCH_SERVICE_ENDPOINT}/$metadata#indexers/$entity",
   "@odata.etag": "\"0x8DDBD080B342147\"",
-  "name": "hotels-indexer",
+  "name": "${SEARCH_INDEXER_NAME}",
   "description": "",
   "dataSourceName": "update wih dataSourceName",
-  "skillsetName": "update wih skillsetName",
-  "targetIndexName": "update wih targetIndexName",
+  "skillsetName": "${SEARCH_SKILLSET_NAME}",
+  "targetIndexName": "${SEARCH_INDEX_NAME}",
   "disabled": null,
   "schedule": null,
   "parameters": {
